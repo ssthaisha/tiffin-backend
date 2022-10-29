@@ -1,0 +1,1 @@
+export const developServer = 'http://localhost:3005/'
