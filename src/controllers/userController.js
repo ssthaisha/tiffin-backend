@@ -104,19 +104,14 @@ const authUser = asyncHandler(async (req, res) => {
       res.status(401);
       throw new Error(`Invalid email or password +${email}`);
     }
-  } else if (userRole === "VENDOR") {
-    const vendor = await Vendor.findOne({ email: userName });
-    if (vendor && vendor.matchPassword(password)) {
+  } else if (userRole === "CUSTOMER") {
+    const customer = await User.findOne({ email: userName });
+    console.log(customer, 'test here \n >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> \n');
+    if (customer && customer.matchPassword(password)) {
       res.json({
-        _id: vendor._id,
-        fullName: vendor.fullName,
-        shopName: vendor.shopName,
-        email: vendor.email,
-        contactNo: vendor.contactNo,
-        shopContactNo: vendor.shopContactNo,
-        shopEmail: vendor.shopEmail,
-        shopVatNo: vendor.shopVatNo,
-        token: generateToken(vendor._id),
+        _id: customer._id,
+        name: customer.name,
+        token: generateToken(customer._id),
         success: true,
       });
     } else {

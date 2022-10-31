@@ -19,6 +19,23 @@ const userSchema = mongoose.Schema({
     type: Boolean,
     required: true,
   }, 
+  role: {
+    type: String,
+    required: true,
+  },
+  contact: {
+    type: String,
+    required: false,
+  },
+  address: {
+    type: String,
+    required: false,
+  },
+  license:{
+    type:String,
+    required: false,
+  }
+  
 },
 {
   timeStamps: true

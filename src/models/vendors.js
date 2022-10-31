@@ -6,10 +6,6 @@ const vendorSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  shopName: {
-    type: String,
-    required: true,
-  },
   email: {
     type: String,
     required: true,
@@ -19,7 +15,7 @@ const vendorSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  shopContactNo: {
+  address: {
     type: String,
     required: false,
   },
@@ -27,10 +23,7 @@ const vendorSchema = mongoose.Schema({
     type: String,
     required: false,
   },
-  shopVatNo: {
-    type: String,
-    required: false,
-  },
+  
   password: {
     type: String,
     required: true,
@@ -42,13 +35,6 @@ const vendorSchema = mongoose.Schema({
   isActive: {
     type: Boolean,
     requiered: true,
-  },
-  isVerified: {
-    type: Boolean,
-    requiered: true,
-  },
-  verifiedAt: {
-    type: Date,
   },
 },
 {
