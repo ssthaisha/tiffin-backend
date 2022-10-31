@@ -14,6 +14,8 @@ import orderRouter from "./routers/orderRouter.js";
 import vendorRouter from "./routers/vendorRouter.js";
 import categoryRouter from "./routers/categoriesRouter.js";
 import promotionRouter from "./routers/promotionsRouter.js";
+import driversRouter from "./routers/driversRouter";
+import chefsRouter from "./routers/chefsRouter";
 import uploadRouter from "./routers/uploadRouter.js";
 import { errorHandler, notFoundHandler } from "./middlewares/errorHanders.js";
 
@@ -46,6 +48,8 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/products", productRouter);
+app.use("/api/chefs", chefsRouter);
+app.use("/api/drivers", driversRouter);
 app.use("/api/auth", userRouter);
 app.use("/api/orders", orderRouter);
 app.use("/api/vendors", vendorRouter);
