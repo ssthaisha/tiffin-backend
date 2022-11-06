@@ -18,6 +18,8 @@ const registerChef = asyncHandler(async (req, res) => {
     address,
     contactNo,
     password,
+    image: `/uploads/file-1606697265286cool.jpg`,
+    oneTimeAvailable: true,
     isActive: true,
     isVerified: true,
   });

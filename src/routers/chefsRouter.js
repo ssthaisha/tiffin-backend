@@ -46,4 +46,4 @@ router.route("/:id/activate").get(protect, admin, activateChef);
 // @route GET /api/products
 // @access Public route
 
-export default router;
+module.exports = router;

@@ -20,19 +20,19 @@ const router = express.Router();
 
 router.route("/signup").post(registerVendor);
 
-router.route('/verified').get(getVerifiedVendors);
+router.route("/verified").get(getVerifiedVendors);
 
-router.route('/nonverified').get(getNonVerifiedVendors);
+router.route("/nonverified").get(getNonVerifiedVendors);
 
-router.route('/active').get(getActiveVendors);
+router.route("/active").get(getActiveVendors);
 
 // router.post("/login", authUser);
 
 router
   .route("/profile")
   .get(vendor, getVendorProfile)
-  .put(vendor, updateVendorProfile)
-  // .delete(protect, admin, deleteUser);
+  .put(vendor, updateVendorProfile);
+// .delete(protect, admin, deleteUser);
 // router.route('/:id').get(getProductById)
 
 // router
@@ -40,13 +40,13 @@ router
 //   .put(protect, admin, updateUser)
 //   .get(protect, admin, getUserById)
 //   .delete(protect, admin, deleteUser)
-router.route('/:id').get(getVendor);
+router.route("/:id").get(getVendor);
 
-router.route('/:id/verify').get(protect, admin, updateVendorVerification);
-router.route('/:id/deactivate').get(protect, admin, deactivateVendor);
-router.route('/:id/activate').get(protect, admin, activateVendor);
+router.route("/:id/verify").get(protect, admin, updateVendorVerification);
+router.route("/:id/deactivate").get(protect, admin, deactivateVendor);
+router.route("/:id/activate").get(protect, admin, activateVendor);
 // @desc Fetch all products
 // @route GET /api/products
 // @access Public route
 
-export default router;
+module.exports = router;

@@ -7,7 +7,7 @@ import {
   deleteUser,
   updateUser,
   getUserById,
-  getUsers
+  getUsers,
 } from "../controllers/userController.js";
 import { protect, admin } from "../middlewares/authMiddleware.js";
 const router = express.Router();
@@ -18,7 +18,7 @@ const router = express.Router();
 
 router.route("/signup").post(registerUser);
 
-router.route('/users').get(getUsers)
+router.route("/users").get(getUsers);
 
 router.post("/login", authUser);
 
@@ -30,13 +30,12 @@ router
 // router.route('/:id').get(getProductById)
 
 router
-  .route('/:id')
+  .route("/:id")
   .put(protect, admin, updateUser)
   .get(protect, admin, getUserById)
-  .delete(protect, admin, deleteUser)
+  .delete(protect, admin, deleteUser);
 // @desc Fetch all products
 // @route GET /api/products
 // @access Public route
 
-
-export default router;
+module.exports = router;

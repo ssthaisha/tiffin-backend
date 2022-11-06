@@ -18,33 +18,31 @@ const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "uploads/promotions");
   },
-  filename: function(req, file, cb) {
+  filename: function (req, file, cb) {
     // console.log(file)
-    cb(null, `${file.fieldname}-${+Date.now()+file.originalname}`);
+    cb(null, `${file.fieldname}-${+Date.now() + file.originalname}`);
   },
 });
 
-function checkFileType(file, cb){
-  const filetypes =/jpg|jpeg|png/
+function checkFileType(file, cb) {
+  const filetypes = /jpg|jpeg|png/;
   // const extname = filetypes.test(path.extname(file.originalname).toLowerCase())
-  const mimetype = filetypes.test(file.mimetype)
+  const mimetype = filetypes.test(file.mimetype);
 
-  console.log(file, 'ff')
-  if(mimetype) {
-    return cb(null, true)
+  console.log(file, "ff");
+  if (mimetype) {
+    return cb(null, true);
   } else {
-    cb('Images only!')
+    cb("Images only!");
   }
-
 }
 
 const upload = multer({
   storage: storage,
-  fileFilter: function(req, file, cb) {
-
-    checkFileType(file, cb)
-  }
-})
+  fileFilter: function (req, file, cb) {
+    checkFileType(file, cb);
+  },
+});
 
 // const upload =multer({
 //   dest: 'uploads/'
@@ -60,7 +58,10 @@ const upload = multer({
 //   "NODE_ENV": "production"
 // }
 
-router.route("/").get(getPromotions).post(upload.array('file', 1), createPromotion);
+router
+  .route("/")
+  .get(getPromotions)
+  .post(upload.array("file", 1), createPromotion);
 // router.route('/:id/reviews').post(createProductReview)
 
 // router.route('/verified').get(getVerifiedProducts)
@@ -77,13 +78,12 @@ router.route("/").get(getPromotions).post(upload.array('file', 1), createPromoti
 //   .delete(protect, admin, deleteProduct)
 //   .put(protect, admin, updateProduct);
 
+// router.route('/:id/verify').get(updateProductVerification);
+// router.route('/:id/deactivate').get(deactivateProduct);
+// router.route('/:id/activate').get(activateProduct);
 
-  // router.route('/:id/verify').get(updateProductVerification);
-  // router.route('/:id/deactivate').get(deactivateProduct);
-  // router.route('/:id/activate').get(activateProduct);
-
-  // @desc Fetch all products
+// @desc Fetch all products
 // @route GET /api/products
 // @access Public route
 
-export default router;
+module.exports = router;

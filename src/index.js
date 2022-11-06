@@ -18,7 +18,7 @@ import driversRouter from "./routers/driversRouter";
 import chefsRouter from "./routers/chefsRouter";
 import uploadRouter from "./routers/uploadRouter.js";
 import { errorHandler, notFoundHandler } from "./middlewares/errorHanders.js";
-
+import subscriberRouter from "./routers/subscriptionRouter";
 // const express = require('express')
 const app = express();
 // const connectDB = require('./db')
@@ -56,6 +56,7 @@ app.use("/api/vendors", vendorRouter);
 app.use("/api/categories", categoryRouter);
 app.use("/api/promotions", promotionRouter);
 // app.use('/api/upload', uploadRouter)
+app.use("/api/subscribe", subscriberRouter);
 
 const __dirname = path.resolve();
 console.log(path.join(__dirname, "/uploads"));

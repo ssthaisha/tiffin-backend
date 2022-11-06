@@ -6,7 +6,7 @@ import {
   getOrders,
   getMyOrders,
   updateOrderToDelivered,
-  getOrdersByVendor
+  getOrdersByVendor,
 } from "../controllers/orderController.js";
 import { protect, admin, vendor } from "../middlewares/authMiddleware.js";
 const router = express.Router();
@@ -17,13 +17,13 @@ const router = express.Router();
 
 router.route("/").post(addOrderItems).get(protect, admin, getOrders);
 
-router.route('/myorders').get(protect, getMyOrders)
+router.route("/myorders").get(protect, getMyOrders);
 router.route("/:id").get(protect, getOrderById);
 router.route("/:id/pay").put(protect, updateOrderToPaid);
-router.route('/:id/deliver').put(protect, admin, updateOrderToDelivered);
+router.route("/:id/deliver").put(protect, admin, updateOrderToDelivered);
 // @desc Fetch all products
 // @route GET /api/products
 // @access Public route
-router.route('/byvendor/:vendorId').get(vendor, getOrdersByVendor)
+router.route("/byvendor/:vendorId").get(vendor, getOrdersByVendor);
 
-export default router;
+module.exports = router;

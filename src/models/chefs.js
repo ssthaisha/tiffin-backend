@@ -23,12 +23,16 @@ const chefSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    picture: {
+    image: {
       type: String,
       required: false,
     },
     bio: {
       type: String,
+      require: false,
+    },
+    oneTimeAvailable: {
+      type: Boolean,
       require: false,
     },
     // categoriesAllowed: [{
@@ -38,6 +42,10 @@ const chefSchema = mongoose.Schema(
     isActive: {
       type: Boolean,
       requiered: true,
+    },
+    isVerified: {
+      type: Boolean,
+      required: true,
     },
   },
   {

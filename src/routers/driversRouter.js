@@ -49,4 +49,4 @@ router.route("/:id/activate").get(protect, admin, activateDriver);
 // @route GET /api/products
 // @access Public route
 
-export default router;
+module.exports = router;
