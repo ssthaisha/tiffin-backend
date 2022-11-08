@@ -42,6 +42,49 @@ const registerChef = asyncHandler(async (req, res) => {
   }
 });
 
+const registerChefFormData = asyncHandler(async (req, res) => {
+  const { fullName, email, contactNo, address, password, latitude, longitude } =
+    req.body;
+  // console.log(req.body);
+  const image = req.files
+    ? req.files[0].path
+    : "/uploads/file-1606697265286cool.jpg";
+  const chefExists = await Chef.findOne({ email });
+  if (chefExists) {
+    res.status(400);
+    throw new Error("Email already taken!");
+  }
+  //   const password = Math.random().toString(36).substring(2);
+  const chef = await Chef.create({
+    fullName,
+    email,
+    address,
+    contactNo,
+    password,
+    image: image,
+    latitude: latitude || 27.232323,
+    longitude: longitude || 85.787878,
+    oneTimeAvailable: true,
+    isActive: true,
+    isVerified: true,
+  });
+
+  if (chef) {
+    res.status(201).json({
+      _id: chef._id,
+      fullName: chef.fullName,
+      email: chef.email,
+      contactNo: chef.contactNo,
+      shopContactNo: chef.shopContactNo,
+      message: "Chef Request sent!",
+      success: true,
+    });
+  } else {
+    res.status(404);
+    throw new Error("User can't be registered");
+  }
+});
+
 const updateChefVerification = asyncHandler(async (req, res) => {
   const chef = await Chef.findById(req.params.id);
 
@@ -174,6 +217,7 @@ const getChef = asyncHandler(async (req, res) => {
 
 export {
   registerChef,
+  registerChefFormData,
   updateChefVerification,
   deactivateChef,
   activateChef,

@@ -68,6 +68,7 @@ const upload = multer({
 // @access Public route
 
 router.route("/").get(getProducts).post(upload.array("file", 5), createProduct);
+
 router.route("/:id/reviews").post(createProductReview);
 
 router.route("/verified").get(getVerifiedProducts);
