@@ -48,7 +48,7 @@ const registerChefFormData = asyncHandler(async (req, res) => {
   // console.log(req.body);
   const image = req.files
     ? req.files[0].path
-    : "/uploads/file-1606697265286cool.jpg";
+    : "uploads/file-1606697265286cool.jpg";
   const chefExists = await Chef.findOne({ email });
   if (chefExists) {
     res.status(400);
@@ -61,7 +61,7 @@ const registerChefFormData = asyncHandler(async (req, res) => {
     address,
     contactNo,
     password,
-    image: image,
+    image: "/" + image,
     latitude: latitude || 27.232323,
     longitude: longitude || 85.787878,
     oneTimeAvailable: true,
