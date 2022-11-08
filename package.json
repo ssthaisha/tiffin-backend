@@ -33,7 +33,6 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@react-navigation/native": "^6.0.13",
     "babel-cli": "^6.24.0",
     "babel-eslint": "^7.1.1",
     "babel-istanbul": "^0.12.2",
@@ -52,6 +51,7 @@
     "formidable": "^1.2.2",
     "helmet": "^4.2.0",
     "jsonwebtoken": "^8.5.1",
+    "moment": "^2.29.4",
     "mongoose": "^5.10.17",
     "multer": "^1.4.2",
     "nodemailer": "^6.8.0",

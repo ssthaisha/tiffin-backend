@@ -31,7 +31,7 @@ router
 
 router
   .route("/:id")
-  .put(protect, admin, updateUser)
+  .put(updateUser)
   .get(protect, admin, getUserById)
   .delete(protect, admin, deleteUser);
 // @desc Fetch all products

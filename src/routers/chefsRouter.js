@@ -11,6 +11,7 @@ import {
   updateChefProfile,
   getChef,
 } from "../controllers/chefsController.js";
+import { updateChef } from "../controllers/userController.js";
 import { protect, admin, chef } from "../middlewares/authMiddleware.js";
 const router = express.Router();
 
@@ -38,6 +39,8 @@ router.route("/active").get(getActiveChefs);
 //   .get(protect, admin, getUserById)
 //   .delete(protect, admin, deleteUser)
 router.route("/:id").get(getChef);
+
+router.route("/:id/update").post(updateChef);
 
 router.route("/:id/verify").get(protect, admin, updateChefVerification);
 router.route("/:id/deactivate").get(protect, admin, deactivateChef);

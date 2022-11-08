@@ -31,6 +31,14 @@ const driverSchema = mongoose.Schema(
       type: Boolean,
       requiered: true,
     },
+    latitude: {
+      type: String,
+      required: false,
+    },
+    longitude: {
+      type: String,
+      required: false,
+    },
   },
   {
     timeStamps: true,

@@ -125,7 +125,12 @@ const authUser = asyncHandler(async (req, res) => {
       res.json({
         _id: customer._id,
         name: customer.name,
+        fullName: customer.fullName,
         email: customer.email,
+        address: customer.address,
+        latitude: customer.latitude,
+        longitude: customer.longitude,
+        contactNo: customer.contactNo,
         token: generateToken(customer._id),
         role: "CUSTOMER",
         success: true,
@@ -193,6 +198,7 @@ const subscribeTo = asyncHandler(async (req, res) => {
     user.subscribedTo = req.params.chefId || user.subscribedTo;
     user.subscriptionExpiryDate =
       new Date("2023-01-01") || user.subscriptionExpiryDate;
+    user.requestAccepted = false;
     // user.fullName = "abcd";
     // user.name = "Aaayuu";
 
@@ -222,6 +228,23 @@ const getSubscribers = asyncHandler(async (req, res) => {
   }
 });
 
+const acceptRequest = asyncHandler(async (req, res) => {
+  const subscriberId = req.params.id;
+  const user = User.findById(subscriberId);
+  console.log(req.params, user, "\n >>>>>> \n check params");
+  if (user) {
+    user.requestAccepted = true;
+    const updatedUser = user.save();
+    res.json({
+      message: "Accepted!!",
+      ...updatedUser,
+    });
+  } else {
+    res.status(401);
+    throw new Error(`User not Found`);
+  }
+});
+
 const getUserById = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.id).select("-password");
 
@@ -237,13 +260,58 @@ const getUserById = asyncHandler(async (req, res) => {
 });
 
 const updateUser = asyncHandler(async (req, res) => {
-  const { name, email, password, isAdmin, userId } = req.body;
+  const {
+    name,
+    email,
+    password,
+    isAdmin,
+    userId,
+    address,
+    latitude,
+    longitude,
+  } = req.body;
 
   const user = await User.findById(userId);
   if (user) {
     user.name = name || user.name;
     user.email = email || user.email;
+    user.address = address || user.address;
+    user.latitude = latitude || user.latitude;
+    user.longitude = longitude || user.longitude;
     user.isAdmin = isAdmin || user.isAdmin;
+
+    const updatedUser = await user.save();
+
+    res.json({
+      _id: updatedUser._id,
+      name: updatedUser.name,
+      fullName: updatedUser.fullName,
+      email: updatedUser.email,
+      address: updatedUser.address,
+      latitude: updatedUser.latitude,
+      longitude: updatedUser.longitude,
+      contactNo: updatedUser.contactNo,
+      token: generateToken(updateUser._id),
+      role: "CUSTOMER",
+      success: true,
+    });
+  } else {
+    res.status(404);
+    throw new Error("User not found");
+  }
+  res.send("Success");
+});
+
+const updateChef = asyncHandler(async (req, res) => {
+  const { name, email, password, isAdmin, chefId } = req.body;
+
+  const user = await Chef.findById(userId);
+  if (user) {
+    user.name = name || user.name;
+    user.email = email || user.email;
+    user.address = address || user.address;
+    user.latitude = latitude || user.latitude;
+    user.longitude = longitude || user.longitude;
 
     const updatedUser = await user.save();
 
@@ -271,4 +339,6 @@ export {
   getUserById,
   subscribeTo,
   getSubscribers,
+  acceptRequest,
+  updateChef,
 };

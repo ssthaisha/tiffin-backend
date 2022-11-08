@@ -19,6 +19,8 @@ const registerChef = asyncHandler(async (req, res) => {
     contactNo,
     password,
     image: `/uploads/file-1606697265286cool.jpg`,
+    latitude: 27.232323,
+    longitude: 87.787878,
     oneTimeAvailable: true,
     isActive: true,
     isVerified: true,

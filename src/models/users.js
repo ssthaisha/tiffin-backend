@@ -45,6 +45,18 @@ const userSchema = mongoose.Schema(
       type: Date,
       required: false,
     },
+    requestAccepted: {
+      type: Boolean,
+      required: false,
+    },
+    latitude: {
+      type: String,
+      required: false,
+    },
+    longitude: {
+      type: String,
+      required: false,
+    },
   },
   {
     timeStamps: true,
