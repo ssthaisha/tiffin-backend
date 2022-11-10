@@ -19,6 +19,7 @@ import categoryRouter from "./routers/categoriesRouter.js";
 import promotionRouter from "./routers/promotionsRouter.js";
 import driversRouter from "./routers/driversRouter";
 import chefsRouter from "./routers/chefsRouter";
+import locationsRouter from "./routers/locationsRouter";
 import uploadRouter from "./routers/uploadRouter.js";
 import { errorHandler, notFoundHandler } from "./middlewares/errorHanders.js";
 import subscriberRouter from "./routers/subscriptionRouter";
@@ -63,6 +64,7 @@ app.use("/api/orders", orderRouter);
 app.use("/api/vendors", vendorRouter);
 app.use("/api/categories", categoryRouter);
 app.use("/api/promotions", promotionRouter);
+app.use("/api/locations", locationsRouter);
 // app.use('/api/upload', uploadRouter)
 app.use("/api/subscribe", subscriberRouter);
 
