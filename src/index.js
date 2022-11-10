@@ -8,6 +8,9 @@ import helmet from "helmet";
 import bodyParser from "body-parser";
 import formidable from "express-formidable";
 
+import { createServer } from "http";
+import { Server } from "socket.io";
+
 import productRouter from "./routers/productRouter.js";
 import userRouter from "./routers/userRouter.js";
 import orderRouter from "./routers/orderRouter.js";
@@ -40,7 +43,11 @@ app.use(
 );
 
 app.use(helmet());
-app.use(cors());
+app.use(
+  cors({
+    origin: ["http://localhost:3000", "http://localhost:19000"],
+  })
+);
 // app.use(express.json())
 
 app.get("/", (req, res) => {
@@ -70,4 +77,15 @@ app.use(errorHandler);
 // app.use('/apip')
 const PORT = process.env.PORT;
 
-app.listen(PORT, console.log("running on :" + PORT));
+const httpServer = createServer(app);
+
+const io = new Server(httpServer, {
+  cors: ["http://localhost:3000", "http://localhost:19000"],
+});
+
+io.on("connection", (socket) => {
+  console.log(socket, "New user added to socket");
+  socket.emit("message", "TExttttt");
+});
+
+httpServer.listen(PORT, console.log("running on :" + PORT));
