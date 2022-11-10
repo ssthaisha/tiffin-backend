@@ -4,6 +4,7 @@ import User from "../models/users.js";
 import Driver from "../models/drivers.js";
 import Vendor from "../models/vendors.js";
 import generateToken from "../utils/generateToken.js";
+import { io } from "../socket/index.js";
 
 const registerUser = asyncHandler(async (req, res) => {
   const { fullName, email, password, role, contactNo } = req.body;
@@ -112,6 +113,7 @@ const authUser = asyncHandler(async (req, res) => {
         token: generateToken(user._id),
         success: true,
       });
+      io.emit("message", "Admin logged in!!!");
     } else {
       res.status(401);
       throw new Error(`Invalid email or password +${email}`);

@@ -22,6 +22,7 @@ import chefsRouter from "./routers/chefsRouter";
 import uploadRouter from "./routers/uploadRouter.js";
 import { errorHandler, notFoundHandler } from "./middlewares/errorHanders.js";
 import subscriberRouter from "./routers/subscriptionRouter";
+import SocketServerIO from "./socket/index.js";
 // const express = require('express')
 const app = express();
 // const connectDB = require('./db')
@@ -79,13 +80,6 @@ const PORT = process.env.PORT;
 
 const httpServer = createServer(app);
 
-const io = new Server(httpServer, {
-  cors: ["http://localhost:3000", "http://localhost:19000"],
-});
-
-io.on("connection", (socket) => {
-  console.log(socket, "New user added to socket");
-  socket.emit("message", "TExttttt");
-});
+SocketServerIO(httpServer);
 
 httpServer.listen(PORT, console.log("running on :" + PORT));
