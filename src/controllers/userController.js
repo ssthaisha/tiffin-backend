@@ -240,7 +240,7 @@ const acceptRequest = asyncHandler(async (req, res) => {
     const updatedUser = user.save();
     res.json({
       message: "Accepted!!",
-      ...updatedUser,
+      ...user,
     });
   } else {
     res.status(401);

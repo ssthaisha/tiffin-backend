@@ -54,6 +54,7 @@ const registerDriverFormData = asyncHandler(async (req, res) => {
     fullName,
     address,
     contactNo,
+    email: contactNo,
     password,
     image: "/" + image,
     isActive: true,

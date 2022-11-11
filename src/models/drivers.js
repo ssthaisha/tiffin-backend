@@ -6,6 +6,10 @@ const driverSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    email: {
+      type: String,
+      required: false,
+    },
     contactNo: {
       type: String,
       required: true,
