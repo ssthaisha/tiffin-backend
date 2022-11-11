@@ -10,8 +10,8 @@ const SocketServerIO = (httpServer) => {
   });
 
   io.on("connection", (socket) => {
-    console.log(socket, "New user added to socket");
-    socket.emit("message", "TExttttt");
+    console.log("socket", "New user added to socket");
+    // socket.emit("message", "TExttttt");
   });
   //   return io;
 };

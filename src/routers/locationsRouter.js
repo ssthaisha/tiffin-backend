@@ -10,7 +10,11 @@ router.post(
     const { latitude, longitude } = req.body;
     const { chefId, customerId } = req.params;
     console.log(latitude, longitude, "gps");
-    io.emit("message", `${JSON.stringify({ latitude, longitude })}`);
+    io.emit(
+      //   `${chefId}-${customerId}`,
+      `location`,
+      `${JSON.stringify({ latitude, longitude })}`
+    );
     res.json({
       latitude,
       longitude,
