@@ -38,6 +38,42 @@ const registerDriver = asyncHandler(async (req, res) => {
   }
 });
 
+const registerDriverFormData = asyncHandler(async (req, res) => {
+  const { fullName, contactNo, address, password } = req.body;
+  // console.log(req.body);
+  const image = req.files
+    ? req.files[0].path
+    : "uploads/file-1606697265286cool.jpg";
+  const driverExists = await Driver.findOne({ contactNo });
+  if (driverExists) {
+    res.status(400);
+    throw new Error("Number already taken!");
+  }
+  //   const password = Math.random().toString(36).substring(2);
+  const driver = await Driver.create({
+    fullName,
+    address,
+    contactNo,
+    password,
+    image: "/" + image,
+    isActive: true,
+    isVerified: true,
+  });
+
+  if (driver) {
+    res.status(201).json({
+      _id: driver._id,
+      fullName: driver.fullName,
+      contactNo: driver.contactNo,
+      message: "Driver Request sent!",
+      success: true,
+    });
+  } else {
+    res.status(404);
+    throw new Error("User can't be registered");
+  }
+});
+
 const updateDriverVerification = asyncHandler(async (req, res) => {
   const driver = await Driver.findById(req.params.id);
 
@@ -91,6 +127,7 @@ const getNonVerifiedDrivers = asyncHandler(async (req, res) => {
 
 const getActiveDrivers = asyncHandler(async (req, res) => {
   const drivers = await Driver.find({ isVerified: true, isActive: true });
+  console.log(drivers, "testt");
   res.json(drivers);
 });
 
@@ -179,4 +216,5 @@ export {
   getDriverProfile,
   updateDriverProfile,
   getDriver,
+  registerDriverFormData,
 };

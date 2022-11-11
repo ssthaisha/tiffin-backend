@@ -6,14 +6,10 @@ const driverSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    email: {
-      type: String,
-      required: true,
-      unique: true,
-    },
     contactNo: {
       type: String,
       required: true,
+      unique: true,
     },
     address: {
       type: String,
@@ -23,10 +19,18 @@ const driverSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    image: {
+      type: String,
+      required: false,
+    },
     // categoriesAllowed: [{
     //   name: { type: String, required: false }
     // }
     // ],
+    isVerified: {
+      type: Boolean,
+      requiered: true,
+    },
     isActive: {
       type: Boolean,
       requiered: true,

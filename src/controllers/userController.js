@@ -165,7 +165,7 @@ const authUser = asyncHandler(async (req, res) => {
       throw new Error(`Invalid email or password +${email}`);
     }
   } else if (userRole === "DRIVER") {
-    const driver = await Driver.findOne({ email: userName });
+    const driver = await Driver.findOne({ contactNo: userName });
     if (driver && driver.password === password) {
       res.json({
         _id: driver._id,
@@ -177,7 +177,7 @@ const authUser = asyncHandler(async (req, res) => {
     }
   } else {
     res.status(401);
-    throw new Error(`Invalid email or password +${email}`);
+    throw new Error(`Invalid contact or password +${userName}`);
   }
 });
 
